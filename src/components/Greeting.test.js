@@ -33,4 +33,18 @@ describe('Greeting Component',() => {
     const helloWorldElement = screen.getByText("Changed!");
     expect(helloWorldElement).toBeInTheDocument();
   });
+  test('not renders good to see you if button was clicked',async() => {
+    //Arrange
+    render(<Greeting/>);
+
+    //Act
+    const buttonElement = screen.getByRole('button');
+    await userEvent.click(buttonElement);
+
+    //Assert
+
+    const helloWorldElement = screen.queryByText("It's good to see you!");
+    // expect(helloWorldElement).not.toBeInTheDocument();
+    expect(helloWorldElement).toBeNull();
+  });
 });
